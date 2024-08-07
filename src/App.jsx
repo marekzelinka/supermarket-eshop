@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { NavBar } from './components/NavBar.jsx'
 import About from './routes/About.jsx'
@@ -10,20 +11,73 @@ import ProductDetailStorage from './routes/ProductDetailsStorage.jsx'
 import Products from './routes/Products.jsx'
 
 function App() {
+  const [cart, setCart] = useState([])
+
+  useEffect(() => {
+    // to visualize the cart in the console every time in changes
+    // you can also use React dev tools
+    console.log(cart)
+  }, [cart])
+
+  function handleProductAdd(newProduct) {
+    const existingProduct = cart.find((product) => product.id === newProduct.id)
+
+    if (existingProduct) {
+      // increase quantity
+      const updatedCart = cart.map((product) => {
+        if (product.id === newProduct.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          }
+        }
+        return product
+      })
+
+      setCart(updatedCart)
+    } else {
+      // product is new to the cart
+      setCart([
+        ...cart,
+        {
+          ...newProduct,
+          quantity: 1,
+        },
+      ])
+    }
+  }
+
+  function handleProductDelete(id) {
+    const updatedCart = cart.filter((product) => product.id !== id)
+    setCart(updatedCart)
+  }
+
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar cart={cart} />
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
+          <Route
+            path="/products"
+            element={
+              <Products
+                cart={cart}
+                onProductAdd={handleProductAdd}
+                onProductDelete={handleProductDelete}
+              />
+            }
+          />
           <Route path="/products/:id" element={<ProductDetails />}>
-            <Route path="" element={<ProductDetailInfo />} />
+            <Route
+              path=""
+              element={<ProductDetailInfo onProductAdd={handleProductAdd} />}
+            />
             <Route path="nutrition" element={<ProductDetailNutrition />} />
             <Route path="storage" element={<ProductDetailStorage />} />
           </Route>
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart cart={cart} />} />
         </Routes>
       </div>
     </BrowserRouter>

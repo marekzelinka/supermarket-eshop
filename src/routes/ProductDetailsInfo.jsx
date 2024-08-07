@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types'
 import { useOutletContext } from 'react-router-dom'
 import { Button } from '../components/ui/Button.jsx'
 
-export default function ProductDetailInfo() {
+export default function ProductDetailInfo({ onProductAdd }) {
   const product = useOutletContext()
 
   return (
@@ -10,7 +11,10 @@ export default function ProductDetailInfo() {
         {product.description} sold at <strong>${product.price}</strong> per
         piece.
       </p>
-      <Button>${product.price}</Button>
+      <Button onClick={() => onProductAdd(product)}>${product.price}</Button>
     </>
   )
+}
+ProductDetailInfo.propTypes = {
+  onProductAdd: PropTypes.func.isRequired,
 }

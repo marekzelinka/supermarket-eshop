@@ -2,7 +2,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Button } from './ui/Button.jsx'
 
-export function Product({ details }) {
+export function Product({ details, cart, onProductAdd, onProductDelete }) {
+  const productFromCart = cart.find((product) => product.id === details.id)
+  const quantity = productFromCart?.quantity ?? 0
+
   return (
     <div className="product">
       <div className="product-image-container">
@@ -15,9 +18,11 @@ export function Product({ details }) {
             className="product-image"
           />
         </Link>
-        <div className="product-quantity-container">
-          <div className="product-quantity">0</div>
-        </div>
+        {quantity ? (
+          <div className="product-quantity-container">
+            <div className="product-quantity">{quantity}</div>
+          </div>
+        ) : null}
       </div>
       <div className="product-info">
         <h3>{details.name}</h3>
@@ -25,21 +30,33 @@ export function Product({ details }) {
       </div>
       <div className="product-checkout">
         <div>
-          <Button outline className="product-delete">
-            x
-          </Button>
+          {quantity ? (
+            <Button
+              outline
+              onClick={() => onProductDelete(details.id)}
+              className="product-delete"
+            >
+              x
+            </Button>
+          ) : null}
         </div>
-        <Button outline>${details.price}</Button>
+        <Button outline onClick={() => onProductAdd(details)}>
+          ${details.price}
+        </Button>
       </div>
     </div>
   )
 }
 Product.propTypes = {
   details: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    price_id: PropTypes.string.isRequired,
   }).isRequired,
+  cart: PropTypes.array.isRequired,
+  onProductAdd: PropTypes.func.isRequired,
+  onProductDelete: PropTypes.func.isRequired,
 }
