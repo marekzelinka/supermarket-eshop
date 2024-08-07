@@ -8,17 +8,26 @@ export function NavBar() {
       </NavLink>
       <ul>
         <li className="nav-item">
-          <NavLink activeClassName="active" exact to="/">
+          <NavLink
+            className={({ isActive }) => (isActive ? 'active' : '')}
+            to="/"
+          >
             Home
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeClassName="active" exact to="/about">
+          <NavLink
+            className={({ isActive }) => (isActive ? 'active' : '')}
+            to="/about"
+          >
             About us
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeClassName="active" exact to="/products">
+          <NavLink
+            className={({ isActive }) => (isActive ? 'active' : '')}
+            to="/products"
+          >
             Products
           </NavLink>
         </li>

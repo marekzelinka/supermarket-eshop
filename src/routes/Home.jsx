@@ -15,10 +15,10 @@ export default function Home() {
       </div>
       <img
         src="https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto,w_700/v1607770215/react-tutorial/supermarket/home.jpg"
-        width="350"
-        height="240"
-        className="rounded home-image"
         alt=""
+        width={350}
+        height={240}
+        className="rounded home-image"
       />
     </div>
   )

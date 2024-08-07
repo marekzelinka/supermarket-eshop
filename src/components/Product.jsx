@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Button } from './ui/Button.jsx'
 
 export function Product({ details }) {
   return (
     <div className="product">
       <div className="product-image-container">
-        <img
-          src={details.image}
-          alt={details.name}
-          width={100}
-          height={100}
-          className="product-image"
-        />
+        <Link to={`/products/${details.id}`}>
+          <img
+            src={details.image}
+            alt={details.name}
+            width={100}
+            height={100}
+            className="product-image"
+          />
+        </Link>
         <div className="product-quantity-container">
           <div className="product-quantity">0</div>
         </div>
@@ -33,6 +36,7 @@ export function Product({ details }) {
 }
 Product.propTypes = {
   details: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,

@@ -13,10 +13,10 @@ export default function About() {
       </div>
       <img
         src="https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto,w_550/v1607770215/react-tutorial/supermarket/about.jpg"
-        height="275"
-        width="183"
-        className="rounded"
         alt=""
+        width={183}
+        height={275}
+        className="rounded"
       />
     </div>
   )

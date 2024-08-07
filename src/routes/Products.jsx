@@ -5,10 +5,12 @@ import { useFetch } from '../utils.js'
 
 export default function Products() {
   const [products, setProducts] = useState([])
-  const { get, loading } = useFetch(import.meta.env.VITE_API_BASE_URL)
 
+  const { get, loading } = useFetch(import.meta.env.VITE_API_BASE_URL)
   useEffect(() => {
-    get('supermarket.json').then(setProducts).catch(console.error)
+    get('supermarket.json')
+      .then(setProducts)
+      .catch((error) => console.error('Could not load products', error))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
