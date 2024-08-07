@@ -294,6 +294,11 @@ input:focus {
   padding-bottom: 40px;
 }
 
+.home-cta {
+  display: flex;
+  gap: 12px;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: 1fr auto;
