@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { Product } from '../components/Product.jsx'
-import { Loader } from '../components/ui/Loader.jsx'
+import { Spinner } from '../components/ui/Spinner.jsx'
 import { useFetch } from '../utils.js'
 
 export default function Products({ cart, onProductAdd, onProductDelete }) {
@@ -19,11 +19,11 @@ export default function Products({ cart, onProductAdd, onProductDelete }) {
     <div className="products-layout">
       <h1>Products</h1>
       <p>Take a look at our products</p>
-      <div className="products-grid">
-        {loading ? (
-          <Loader />
-        ) : (
-          products.map((product) => (
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="products-grid">
+          {products.map((product) => (
             <Product
               key={product.id}
               details={product}
@@ -31,9 +31,9 @@ export default function Products({ cart, onProductAdd, onProductDelete }) {
               onProductAdd={onProductAdd}
               onProductDelete={onProductDelete}
             />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

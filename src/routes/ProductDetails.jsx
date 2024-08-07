@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
-import { Loader } from '../components/ui/Loader.jsx'
+import { Spinner } from '../components/ui/Spinner.jsx'
 import { useFetch } from '../utils.js'
 
 export default function ProductDetails() {
@@ -18,7 +18,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="product-details-layout">
-        <Loader />
+        <Spinner />
       </div>
     )
   }
@@ -40,25 +40,25 @@ export default function ProductDetails() {
           <ul>
             <li>
               <NavLink
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
                 to=""
                 end
+                className={({ isActive }) => (isActive ? 'tab-active' : '')}
               >
                 Details
               </NavLink>
             </li>
             <li>
               <NavLink
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
                 to="nutrition"
+                className={({ isActive }) => (isActive ? 'tab-active' : '')}
               >
                 Nutrition
               </NavLink>
             </li>
             <li>
               <NavLink
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
                 to="storage"
+                className={({ isActive }) => (isActive ? 'tab-active' : '')}
               >
                 Storage
               </NavLink>

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { formatCurrency } from '../utils.js'
 import { Button } from './ui/Button.jsx'
 
 export function Product({ details, cart, onProductAdd, onProductDelete }) {
@@ -41,7 +42,7 @@ export function Product({ details, cart, onProductAdd, onProductDelete }) {
           ) : null}
         </div>
         <Button outline onClick={() => onProductAdd(details)}>
-          ${details.price}
+          {formatCurrency(details.price)}
         </Button>
       </div>
     </div>

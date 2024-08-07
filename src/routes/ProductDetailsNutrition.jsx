@@ -1,7 +1,14 @@
 import { useOutletContext } from 'react-router-dom'
 
 export default function ProductDetailNutrition() {
-  const { nutrition } = useOutletContext()
+  const product = useOutletContext()
+
+  const values = {
+    Protein: product.nutrition.protein,
+    Carbohydrates: product.nutrition.carbs,
+    Fat: product.nutrition.fat,
+    Salt: product.nutrition.salt,
+  }
 
   return (
     <table className="table table-nutrition">
@@ -12,22 +19,17 @@ export default function ProductDetailNutrition() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Protein</td>
-          <td>{nutrition.protein}g</td>
-        </tr>
-        <tr>
-          <td>Carbohydrates</td>
-          <td>{nutrition.carbs}g</td>
-        </tr>
-        <tr>
-          <td>Fat</td>
-          <td>{nutrition.fat}g</td>
-        </tr>
-        <tr>
-          <td>Salt</td>
-          <td>{nutrition.salt}g</td>
-        </tr>
+        {Object.entries(values).map(([label, value]) => (
+          <tr key={label}>
+            <td>{label}</td>
+            <td>
+              {value.toLocaleString('en-US', {
+                style: 'unit',
+                unit: 'gram',
+              })}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

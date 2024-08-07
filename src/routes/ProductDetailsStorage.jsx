@@ -1,11 +1,11 @@
 import { useOutletContext } from 'react-router-dom'
 
 export default function ProductDetailStorage() {
-  const { storage } = useOutletContext()
+  const product = useOutletContext()
 
   return (
     <p>
-      <strong>Storage instructions:</strong> {storage}
+      <strong>Storage instructions:</strong> {product.storage}
     </p>
   )
 }

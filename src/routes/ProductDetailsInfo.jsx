@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useOutletContext } from 'react-router-dom'
 import { Button } from '../components/ui/Button.jsx'
+import { formatCurrency } from '../utils.js'
 
 export default function ProductDetailInfo({ onProductAdd }) {
   const product = useOutletContext()
@@ -8,10 +9,12 @@ export default function ProductDetailInfo({ onProductAdd }) {
   return (
     <>
       <p>
-        {product.description} sold at <strong>${product.price}</strong> per
-        piece.
+        {product.description} sold at{' '}
+        <strong>{formatCurrency(product.price)}</strong> per piece.
       </p>
-      <Button onClick={() => onProductAdd(product)}>${product.price}</Button>
+      <Button onClick={() => onProductAdd(product)}>
+        {formatCurrency(product.price)}
+      </Button>
     </>
   )
 }
