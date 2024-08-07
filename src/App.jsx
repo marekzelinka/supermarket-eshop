@@ -1,35 +1,23 @@
-import { Button } from './components/Button.jsx'
-import { Input } from './components/Input.jsx'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { NavBar } from './components/NavBar.jsx'
+import About from './routes/About.jsx'
+import Cart from './routes/Cart.jsx'
+import Home from './routes/Home.jsx'
+import Products from './routes/Products.jsx'
 
 function App() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '20px',
-        flexWrap: 'wrap',
-      }}
-    >
-      <Button>Normal</Button>
-      <Button outline>Outline</Button>
-      <Button
-        className="extra-class"
-        onClick={() => {
-          console.log('Button clicked')
-        }}
-      >
-        Customizable
-      </Button>
-      <Input placeholder="First name" />
-      <Input
-        placeholder="Last name"
-        onInput={() => {
-          console.log('Last name changed')
-        }}
-      />
-      <Input placeholder="Email" type="email" required />
-    </div>
+    <BrowserRouter>
+      <NavBar />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
