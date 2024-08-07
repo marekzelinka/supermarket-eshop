@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
 
-export function Button({ outline, className, ...rest }) {
+export function Button({ outline, className, ...props }) {
   return (
     <button
       className={clsx(
@@ -12,7 +12,7 @@ export function Button({ outline, className, ...rest }) {
         },
         className,
       )}
-      {...rest}
+      {...props}
     />
   )
 }

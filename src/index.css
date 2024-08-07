@@ -26,6 +26,53 @@
 
 body {
   background-color: var(--neutral-5);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+/* FORMS */
+.input-required {
+  color: var(--primary-2);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0 1px;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+}
+
+.input {
+  font-size: 16px;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  padding: 0.75em 0.5em;
+  background-color: var(--neutral-5);
+  min-width: 200px;
+  border: none;
+  border-left: 7px solid var(--neutral-4);
+  transition: border-left-color 160ms;
+  background-color: white;
+}
+
+::placeholder {
+  color: var(--neutral-4);
+}
+
+input:focus {
+  outline: none;
+  border-left: 7px solid var(--primary-1);
 }
 
 /* BUTTONS */
