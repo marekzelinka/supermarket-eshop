@@ -1,7 +1,9 @@
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useCart } from '../contexts/cart'
 
-export default function Home({ cart }) {
+export default function Home() {
+  const cart = useCart()
+
   return (
     <div className="home-layout">
       <div>
@@ -14,7 +16,7 @@ export default function Home({ cart }) {
           <Link to="/products" className="btn btn-default">
             Start shopping
           </Link>
-          {cart.length ? (
+          {cart.products.length ? (
             <Link to="/cart" className="btn btn-accent">
               Your cart
             </Link>
@@ -30,7 +32,4 @@ export default function Home({ cart }) {
       />
     </div>
   )
-}
-Home.propTypes = {
-  cart: PropTypes.array.isRequired,
 }

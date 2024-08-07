@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types'
 import { useOutletContext } from 'react-router-dom'
 import { Button } from '../components/ui/Button.jsx'
+import { useCart } from '../contexts/cart.jsx'
 import { formatCurrency } from '../utils.js'
 
-export default function ProductDetailInfo({ onProductAdd }) {
+export default function ProductDetailInfo() {
+  const cart = useCart()
+
   const product = useOutletContext()
 
   return (
@@ -12,12 +14,9 @@ export default function ProductDetailInfo({ onProductAdd }) {
         {product.description} sold at{' '}
         <strong>{formatCurrency(product.price)}</strong> per piece.
       </p>
-      <Button onClick={() => onProductAdd(product)}>
+      <Button onClick={() => cart.addProduct(product)}>
         {formatCurrency(product.price)}
       </Button>
     </>
   )
-}
-ProductDetailInfo.propTypes = {
-  onProductAdd: PropTypes.func.isRequired,
 }

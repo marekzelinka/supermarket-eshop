@@ -1,20 +1,18 @@
 import { loadStripe } from '@stripe/stripe-js'
-import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { Button } from '../components/ui/Button.jsx'
 import { Input } from '../components/ui/Input.jsx'
+import { useCart } from '../contexts/cart.jsx'
 
-export default function Cart({ cart }) {
-  const totalPrice = cart.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0,
-  )
+export default function Cart() {
+  const cart = useCart()
+  const totalPrice = cart.getTotalPrice()
 
   return (
     <div className="cart-layout">
       <div>
         <h1>Your Cart</h1>
-        {cart.length ? (
+        {cart.products.length ? (
           <>
             <table className="table table-cart">
               <thead>
@@ -28,7 +26,7 @@ export default function Cart({ cart }) {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((product) => (
+                {cart.products.map((product) => (
                   <tr key={product.id}>
                     <td>
                       <img src={product.image} width={30} height={30} alt="" />{' '}
@@ -50,7 +48,7 @@ export default function Cart({ cart }) {
                 </tr>
               </tfoot>
             </table>
-            <PayForm cart={cart} />
+            <PayForm />
           </>
         ) : (
           <p>You have not added any product to your cart yet.</p>
@@ -59,20 +57,10 @@ export default function Cart({ cart }) {
     </div>
   )
 }
-Cart.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      price_id: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-}
 
-function PayForm({ cart }) {
+function PayForm() {
+  const cart = useCart()
+
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -81,7 +69,7 @@ function PayForm({ cart }) {
 
     setIsLoading(true)
 
-    const lineItems = cart.map((product) => {
+    const lineItems = cart.products.map((product) => {
       return { price: product.price_id, quantity: product.quantity }
     })
 
@@ -114,4 +102,3 @@ function PayForm({ cart }) {
     </form>
   )
 }
-PayForm.propTypes = Cart.propTypes

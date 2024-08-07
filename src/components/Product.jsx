@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useCart } from '../contexts/cart.jsx'
 import { formatCurrency } from '../utils.js'
 import { Button } from './ui/Button.jsx'
 
-export function Product({ details, cart, onProductAdd, onProductDelete }) {
-  const productFromCart = cart.find((product) => product.id === details.id)
+export function Product({ details }) {
+  const cart = useCart()
+  const productFromCart = cart.findProductById(details.id)
   const quantity = productFromCart?.quantity ?? 0
 
   return (
@@ -34,14 +36,14 @@ export function Product({ details, cart, onProductAdd, onProductDelete }) {
           {quantity ? (
             <Button
               outline
-              onClick={() => onProductDelete(details.id)}
+              onClick={() => cart.deleteProductById(details.id)}
               className="product-delete"
             >
               x
             </Button>
           ) : null}
         </div>
-        <Button outline onClick={() => onProductAdd(details)}>
+        <Button outline onClick={() => cart.addProduct(details)}>
           {formatCurrency(details.price)}
         </Button>
       </div>
@@ -57,7 +59,4 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     price_id: PropTypes.string.isRequired,
   }).isRequired,
-  cart: PropTypes.array.isRequired,
-  onProductAdd: PropTypes.func.isRequired,
-  onProductDelete: PropTypes.func.isRequired,
 }

@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { useCart } from '../contexts/cart'
 
-export function NavBar({ cart }) {
-  const cartCount = cart.reduce((total, product) => total + product.quantity, 0)
+export function NavBar() {
+  const cart = useCart()
+  const cartCount = cart.getCurrentCount()
 
   const navigation = [
     { label: 'Home', href: '/' },
@@ -34,16 +35,4 @@ export function NavBar({ cart }) {
       </ul>
     </nav>
   )
-}
-NavBar.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      price_id: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
 }
