@@ -1,19 +1,10 @@
-import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { Spinner } from '../components/ui/Spinner.jsx'
-import { useFetch } from '../utils.js'
+import { useProduct } from '../data.js'
 
 export default function ProductDetails() {
-  const [product, setProduct] = useState(null)
-
   const { id } = useParams()
-  const { get } = useFetch(import.meta.env.VITE_API_BASE_URL)
-  useEffect(() => {
-    get(`productinfo/id${id}.json`)
-      .then(setProduct)
-      .catch((error) => console.error('Could not load product details', error))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const product = useProduct(id)
 
   const tabs = [
     { label: 'Details', href: '', end: true },
@@ -21,44 +12,46 @@ export default function ProductDetails() {
     { label: 'Storage', href: 'storage' },
   ]
 
-  if (!product) {
-    return (
-      <div className="product-details-layout">
-        <Spinner />
-      </div>
-    )
-  }
-
   return (
     <div className="product-details-layout">
-      <div>
-        <h2>{product.name}</h2>
-        <img
-          src={product.image}
-          alt={product.name}
-          width={125}
-          height={125}
-          className="product-details-image"
-        />
-      </div>
-      <div>
-        <div className="tabs">
-          <ul>
-            {tabs.map((tab) => (
-              <li key={tab.label}>
-                <NavLink
-                  to={tab.href}
-                  end={tab.end}
-                  className={({ isActive }) => (isActive ? 'tab-active' : '')}
-                >
-                  {tab.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Outlet context={product} />
-      </div>
+      {product.isLoading ? (
+        <Spinner />
+      ) : product.error ? (
+        <p>Could not load product details. Please try again later.</p>
+      ) : (
+        <>
+          <div>
+            <h2>{product.data.name}</h2>
+            <img
+              src={product.data.image}
+              alt={product.data.name}
+              width={125}
+              height={125}
+              className="product-details-image"
+            />
+          </div>
+          <div>
+            <div className="tabs">
+              <ul>
+                {tabs.map((tab) => (
+                  <li key={tab.label}>
+                    <NavLink
+                      to={tab.href}
+                      end={tab.end}
+                      className={({ isActive }) =>
+                        isActive ? 'tab-active' : ''
+                      }
+                    >
+                      {tab.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Outlet context={product.data} />
+          </div>
+        </>
+      )}
     </div>
   )
 }

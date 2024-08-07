@@ -1,29 +1,20 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
 import { Product } from '../components/Product.jsx'
 import { Spinner } from '../components/ui/Spinner.jsx'
-import { useFetch } from '../utils.js'
+import { useProducts } from '../data.js'
 
 export default function Products({ cart, onProductAdd, onProductDelete }) {
-  const [products, setProducts] = useState([])
-
-  const { get, loading } = useFetch(import.meta.env.VITE_API_BASE_URL)
-  useEffect(() => {
-    get('supermarket.json')
-      .then(setProducts)
-      .catch((error) => console.error('Could not load products', error))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const products = useProducts()
 
   return (
     <div className="products-layout">
       <h1>Products</h1>
       <p>Take a look at our products</p>
-      {loading ? (
+      {products.isLoading ? (
         <Spinner />
       ) : (
         <div className="products-grid">
-          {products.map((product) => (
+          {products.data.map((product) => (
             <Product
               key={product.id}
               details={product}
