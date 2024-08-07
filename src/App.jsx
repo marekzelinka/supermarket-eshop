@@ -4,6 +4,7 @@ import { NavBar } from './components/NavBar.jsx'
 import About from './routes/About.jsx'
 import Cart from './routes/Cart.jsx'
 import Home from './routes/Home.jsx'
+import PaymentSuccess from './routes/PaymentSuccess.jsx'
 import ProductDetails from './routes/ProductDetails.jsx'
 import ProductDetailInfo from './routes/ProductDetailsInfo.jsx'
 import ProductDetailNutrition from './routes/ProductDetailsNutrition.jsx'
@@ -88,6 +89,7 @@ function App() {
             <Route path="storage" element={<ProductDetailStorage />} />
           </Route>
           <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
         </Routes>
       </div>
     </BrowserRouter>
