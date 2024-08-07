@@ -536,5 +536,6 @@ input:focus {
 
 .theme-switcher {
   min-width: auto;
-  padding: 5px;
+  padding: 8px 22px;
+  border-radius: 9999px;
 }
