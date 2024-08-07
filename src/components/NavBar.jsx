@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../contexts/cart'
+import { Button } from './ui/Button'
 
 export function NavBar() {
   const cart = useCart()
@@ -11,12 +13,38 @@ export function NavBar() {
     { label: 'Products', href: '/products' },
   ]
 
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  useEffect(() => {
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches
+
+    if (prefersDark) {
+      setIsDarkTheme(true)
+    }
+  }, [])
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
+  }, [isDarkTheme])
+
   return (
     <nav className="navbar">
       <NavLink to="/" className="nav-brand">
         SuperM
       </NavLink>
       <ul>
+        <li className="nav-item">
+          <Button
+            className="theme-switcher"
+            onClick={() => setIsDarkTheme((isDarkTheme) => !isDarkTheme)}
+          >
+            {isDarkTheme ? 'Dark' : 'Light'}
+          </Button>
+        </li>
         {navigation.map((item) => (
           <li key={item.label} className="nav-item">
             <NavLink
