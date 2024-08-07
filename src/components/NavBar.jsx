@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useCart } from '../contexts/cart'
-import { Button } from './ui/Button'
+import { useCart } from '../contexts/cart.jsx'
+import { Button } from './ui/Button.jsx'
 
 export function NavBar() {
   const cart = useCart()
