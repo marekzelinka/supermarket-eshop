@@ -74,9 +74,12 @@ Cart.propTypes = {
 
 function PayForm({ cart }) {
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   async function handleFormSubmit(event) {
     event.preventDefault()
+
+    setIsLoading(true)
 
     const lineItems = cart.map((product) => {
       return { price: product.price_id, quantity: product.quantity }
@@ -90,6 +93,8 @@ function PayForm({ cart }) {
       cancelUrl: import.meta.env.VITE_STRIPE_CANCEL_URL,
       customerEmail: email,
     })
+
+    setIsLoading(false)
   }
 
   return (
@@ -103,7 +108,9 @@ function PayForm({ cart }) {
         onChange={(event) => setEmail(event.target.value)}
         placeholder="Your email"
       />
-      <Button type="submit">Pay</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Please wait…' : 'Pay'}
+      </Button>
     </form>
   )
 }
