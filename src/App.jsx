@@ -11,12 +11,22 @@ import ProductDetailStorage from './routes/ProductDetailsStorage.jsx'
 import Products from './routes/Products.jsx'
 
 function App() {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(() => {
+    let savedCart = []
+
+    try {
+      savedCart = JSON.parse(localStorage.getItem('cart')) ?? []
+    } catch {
+      /* empty */
+    }
+
+    return savedCart
+  })
 
   useEffect(() => {
-    // to visualize the cart in the console every time in changes
-    // you can also use React dev tools
-    console.log(cart)
+    if (cart) {
+      localStorage.setItem('cart', JSON.stringify(cart))
+    }
   }, [cart])
 
   function handleProductAdd(newProduct) {
