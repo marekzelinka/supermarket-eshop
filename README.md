@@ -1,8 +1,21 @@
-# React + Vite
+# Food Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple supermarket app that I've created while learning React.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**First time**
+
+```bash
+git clone https://github.com/marekzelinka/supermarket-eshop.git
+cd supermarket-eshop
+pnpm install
+```
+
+**Then you can run the server**
+
+```bash
+pnpm dev
+```
+
+Go to [localhost:5173/](http://localhost:5173/)
