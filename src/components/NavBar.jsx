@@ -4,36 +4,28 @@ import { NavLink } from 'react-router-dom'
 export function NavBar({ cart }) {
   const cartCount = cart.reduce((total, product) => total + product.quantity, 0)
 
+  const navigation = [
+    { label: 'Home', href: '/' },
+    { label: 'About us', href: '/about' },
+    { label: 'Products', href: '/products' },
+  ]
+
   return (
     <nav className="navbar">
       <NavLink to="/" className="nav-brand">
         SuperM
       </NavLink>
       <ul>
-        <li className="nav-item">
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : '')}
-            to="/"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : '')}
-            to="/about"
-          >
-            About us
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : '')}
-            to="/products"
-          >
-            Products
-          </NavLink>
-        </li>
+        {navigation.map((item) => (
+          <li key={item.label} className="nav-item">
+            <NavLink
+              to={item.href}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              {item.label}
+            </NavLink>
+          </li>
+        ))}
         <li>
           <NavLink to="/cart" className="nav-item nav-cart btn btn-accent">
             Cart ({cartCount})

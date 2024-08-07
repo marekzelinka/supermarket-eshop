@@ -15,6 +15,12 @@ export default function ProductDetails() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const tabs = [
+    { label: 'Details', href: '', end: true },
+    { label: 'Nutrition', href: 'nutrition' },
+    { label: 'Storage', href: 'storage' },
+  ]
+
   if (!product) {
     return (
       <div className="product-details-layout">
@@ -38,31 +44,17 @@ export default function ProductDetails() {
       <div>
         <div className="tabs">
           <ul>
-            <li>
-              <NavLink
-                to=""
-                end
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
-              >
-                Details
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="nutrition"
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
-              >
-                Nutrition
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="storage"
-                className={({ isActive }) => (isActive ? 'tab-active' : '')}
-              >
-                Storage
-              </NavLink>
-            </li>
+            {tabs.map((tab) => (
+              <li key={tab.label}>
+                <NavLink
+                  to={tab.href}
+                  end={tab.end}
+                  className={({ isActive }) => (isActive ? 'tab-active' : '')}
+                >
+                  {tab.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
         <Outlet context={product} />
