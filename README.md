@@ -1,4 +1,4 @@
-# Food Tracker
+# Sumpermarket e-shop
 
 This project is a simple supermarket app that I've created while learning React.
 
