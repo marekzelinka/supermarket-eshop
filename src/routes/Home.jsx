@@ -12,7 +12,7 @@ export default function Home() {
           Order your groceries from <em>SuperM</em> with our easy to use app,
           and get your products delivered straight to your doorstep.
         </p>
-        <div className="home-cta">
+        <div className="home-links">
           <Link to="/products" className="btn btn-default">
             Start shopping
           </Link>

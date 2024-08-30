@@ -304,6 +304,11 @@ input:focus {
   padding-bottom: 40px;
 }
 
+.home-links {
+  display: flex;
+  gap: 15px;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: 1fr auto;
