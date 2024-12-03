@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router";
 import { NavBar } from "./components/NavBar.jsx";
 import About from "./routes/About.jsx";
 import Cart from "./routes/Cart.jsx";
@@ -12,12 +12,7 @@ import Products from "./routes/Products.jsx";
 
 function App() {
   return (
-    <BrowserRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <BrowserRouter>
       <NavBar />
       <div className="container">
         <Routes>

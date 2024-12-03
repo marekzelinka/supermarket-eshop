@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { useCart } from "../contexts/cart.jsx";
 import { Button } from "./ui/Button.jsx";
 

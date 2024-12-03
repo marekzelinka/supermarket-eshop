@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useCart } from "../contexts/cart.jsx";
 import { formatCurrency } from "../utils.js";
 import { Button } from "./ui/Button.jsx";

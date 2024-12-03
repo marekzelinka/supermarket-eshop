@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { Button } from "../components/ui/Button.jsx";
 import { useCart } from "../contexts/cart.jsx";
 import { formatCurrency } from "../utils.js";

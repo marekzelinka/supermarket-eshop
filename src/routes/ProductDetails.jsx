@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router";
 import { Spinner } from "../components/ui/Spinner.jsx";
 import { useProduct } from "../data.js";
 
