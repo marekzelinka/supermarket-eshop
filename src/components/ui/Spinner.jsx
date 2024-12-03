@@ -1,7 +1,6 @@
 export function Spinner() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 66 66"
       width={65}
       height={65}
@@ -18,5 +17,5 @@ export function Spinner() {
         className="path"
       />
     </svg>
-  )
+  );
 }

@@ -1,16 +1,16 @@
-import { NavLink, Outlet, useParams } from 'react-router-dom'
-import { Spinner } from '../components/ui/Spinner.jsx'
-import { useProduct } from '../data.js'
+import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Spinner } from "../components/ui/Spinner.jsx";
+import { useProduct } from "../data.js";
 
 export default function ProductDetails() {
-  const { id } = useParams()
-  const product = useProduct(id)
+  const { id } = useParams();
+  const product = useProduct(id);
 
   const tabs = [
-    { label: 'Details', href: '', end: true },
-    { label: 'Nutrition', href: 'nutrition' },
-    { label: 'Storage', href: 'storage' },
-  ]
+    { label: "Details", href: "", end: true },
+    { label: "Nutrition", href: "nutrition" },
+    { label: "Storage", href: "storage" },
+  ];
 
   return (
     <div className="product-details-layout">
@@ -39,7 +39,7 @@ export default function ProductDetails() {
                       to={tab.href}
                       end={tab.end}
                       className={({ isActive }) =>
-                        isActive ? 'tab-active' : ''
+                        isActive ? "tab-active" : ""
                       }
                     >
                       {tab.label}
@@ -53,5 +53,5 @@ export default function ProductDetails() {
         </>
       )}
     </div>
-  )
+  );
 }

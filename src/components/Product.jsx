@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { useCart } from '../contexts/cart.jsx'
-import { formatCurrency } from '../utils.js'
-import { Button } from './ui/Button.jsx'
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/cart.jsx";
+import { formatCurrency } from "../utils.js";
+import { Button } from "./ui/Button.jsx";
 
 export function Product({ details }) {
-  const cart = useCart()
-  const productFromCart = cart.findProductById(details.id)
-  const quantity = productFromCart?.quantity ?? 0
+  const cart = useCart();
+
+  const productFromCart = cart.findProductById(details.id);
+  const quantity = productFromCart?.quantity ?? 0;
 
   return (
     <div className="product">
@@ -48,7 +49,7 @@ export function Product({ details }) {
         </Button>
       </div>
     </div>
-  )
+  );
 }
 Product.propTypes = {
   details: PropTypes.shape({
@@ -59,4 +60,4 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     price_id: PropTypes.string.isRequired,
   }).isRequired,
-}
+};

@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { useCart } from '../contexts/cart.jsx'
-import { Button } from './ui/Button.jsx'
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useCart } from "../contexts/cart.jsx";
+import { Button } from "./ui/Button.jsx";
+
+const navigation = [
+  { label: "Home", href: "/" },
+  { label: "About us", href: "/about" },
+  { label: "Products", href: "/products" },
+];
 
 export function NavBar() {
-  const cart = useCart()
-  const cartCount = cart.getCurrentCount()
+  const cart = useCart();
+  const cartCount = cart.getCurrentCount();
 
-  const navigation = [
-    { label: 'Home', href: '/' },
-    { label: 'About us', href: '/about' },
-    { label: 'Products', href: '/products' },
-  ]
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
   useEffect(() => {
     const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)',
-    ).matches
+      "(prefers-color-scheme: dark)",
+    ).matches;
 
     if (prefersDark) {
-      setIsDarkTheme(true)
+      setIsDarkTheme(true);
     }
-  }, [])
+  }, []);
+
   useEffect(() => {
     if (isDarkTheme) {
-      document.body.classList.add('dark')
+      document.body.classList.add("dark");
     } else {
-      document.body.classList.remove('dark')
+      document.body.classList.remove("dark");
     }
-  }, [isDarkTheme])
+  }, [isDarkTheme]);
 
   return (
     <nav className="navbar">
@@ -42,14 +44,14 @@ export function NavBar() {
             className="theme-switcher"
             onClick={() => setIsDarkTheme((isDarkTheme) => !isDarkTheme)}
           >
-            {isDarkTheme ? 'Dark' : 'Light'}
+            {isDarkTheme ? "Dark" : "Light"}
           </Button>
         </li>
         {navigation.map((item) => (
           <li key={item.label} className="nav-item">
             <NavLink
               to={item.href}
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              className={({ isActive }) => (isActive ? "active" : "")}
             >
               {item.label}
             </NavLink>
@@ -62,5 +64,5 @@ export function NavBar() {
         </li>
       </ul>
     </nav>
-  )
+  );
 }

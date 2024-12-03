@@ -1,18 +1,23 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { NavBar } from './components/NavBar.jsx'
-import About from './routes/About.jsx'
-import Cart from './routes/Cart.jsx'
-import Home from './routes/Home.jsx'
-import PaymentSuccess from './routes/PaymentSuccess.jsx'
-import ProductDetails from './routes/ProductDetails.jsx'
-import ProductDetailInfo from './routes/ProductDetailsInfo.jsx'
-import ProductDetailNutrition from './routes/ProductDetailsNutrition.jsx'
-import ProductDetailStorage from './routes/ProductDetailsStorage.jsx'
-import Products from './routes/Products.jsx'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { NavBar } from "./components/NavBar.jsx";
+import About from "./routes/About.jsx";
+import Cart from "./routes/Cart.jsx";
+import Home from "./routes/Home.jsx";
+import PaymentSuccess from "./routes/PaymentSuccess.jsx";
+import ProductDetails from "./routes/ProductDetails.jsx";
+import ProductDetailInfo from "./routes/ProductDetailsInfo.jsx";
+import ProductDetailNutrition from "./routes/ProductDetailsNutrition.jsx";
+import ProductDetailStorage from "./routes/ProductDetailsStorage.jsx";
+import Products from "./routes/Products.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
       <NavBar />
       <div className="container">
         <Routes>
@@ -29,7 +34,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -19,5 +19,5 @@ export default function About() {
         className="rounded"
       />
     </div>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
-import { useCart } from '../contexts/cart.jsx'
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/cart.jsx";
 
 export default function Home() {
-  const cart = useCart()
+  const cart = useCart();
 
   return (
     <div className="home-layout">
@@ -31,5 +31,5 @@ export default function Home() {
         className="rounded home-image"
       />
     </div>
-  )
+  );
 }
